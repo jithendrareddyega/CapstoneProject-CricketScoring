@@ -1,0 +1,43 @@
+{% extends 'scoring/base.html' %}
+{% block content %}
+<h2>Add Players for {{ match.team1 }} and {{ match.team2 }}</h2>
+
+<form method="POST" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-4">
+        <label>Team</label>
+        <select name="team" class="form-select">
+            <option value="team1">{{ match.team1 }}</option>
+            <option value="team2">{{ match.team2 }}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label>Player Name</label>
+        <input type="text" name="player_name" class="form-control" required>
+    </div>
+    <div class="col-md-4 mt-4">
+        <button class="btn btn-success">Add Player</button>
+    </div>
+</form>
+
+<hr>
+<h4>{{ match.team1 }} Players:</h4>
+<ul>
+    {% for p in team1_players %}
+    <li>{{ p.name }}</li>
+    {% empty %}
+    <li>No players yet.</li>
+    {% endfor %}
+</ul>
+
+<h4>{{ match.team2 }} Players:</h4>
+<ul>
+    {% for p in team2_players %}
+    <li>{{ p.name }}</li>
+    {% empty %}
+    <li>No players yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'match_dashboard' match.id %}" class="btn btn-primary mt-3">Go to Match Dashboard</a>
+{% endblock %}

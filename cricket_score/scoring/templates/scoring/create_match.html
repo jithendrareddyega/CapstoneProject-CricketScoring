@@ -1,0 +1,20 @@
+{% extends 'scoring/base.html' %}
+{% block content %}
+<h2>Create Match</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Team 1</label>
+        <input type="text" name="team1" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Team 2</label>
+        <input type="text" name="team2" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Total Overs</label>
+        <input type="number" name="overs" class="form-control" required>
+    </div>
+    <button class="btn btn-primary">Create Match</button>
+</form>
+{% endblock %}
